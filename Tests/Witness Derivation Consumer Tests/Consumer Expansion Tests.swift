@@ -1,9 +1,16 @@
 // Live Expansion Tests.swift
 
 import Testing
+import Witness_Derivation
 import WitnessDerivation
 
-// MARK: - Live fixtures (expansion occurs at build time in this consumer)
+// MARK: - Consumer-integration control
+//
+// This suite depends on nothing but the targets behind the "Witness
+// Derivation" library product, so expansion here proves the product carries
+// its own compiler plugin. An expansion test that also depends on
+// WitnessDerivationMacros — or one that supplies the macro mapping itself
+// through `macroSpecs:` — cannot detect an unreachable plugin.
 
 @Witness
 private struct Point {
