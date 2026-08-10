@@ -1,12 +1,12 @@
 // Witness.Macro.swift
 
-import DeclarationDerivationAnalysis
-import DeclarationDerivationDiagnostics
-public import DeclarationDerivationModel
-import DeclarationSwiftSyntaxAdapter
+import Declaration_Derivation_Analysis
+import Declaration_Derivation_Diagnostics
+public import Declaration_Derivation_Model
+import Declaration_SwiftSyntax_Adapter
 public import SwiftSyntax
 public import SwiftSyntaxMacros
-import WitnessDerivation
+import Witness_Derivation_Core
 
 /// The `@Witness` attached-macro expansion host.
 ///
@@ -36,6 +36,7 @@ extension WitnessMacro {
         )
     )
 
+    /// Expands the attached declaration into its derived members.
     public static func expansion(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,

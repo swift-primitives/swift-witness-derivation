@@ -2,7 +2,7 @@
 
 import Testing
 import Witness_Derivation
-import WitnessDerivation
+import Witness_Derivation_Core
 
 // MARK: - Consumer-integration control
 //

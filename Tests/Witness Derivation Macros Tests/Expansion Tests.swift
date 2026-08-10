@@ -1,13 +1,13 @@
 // Expansion Tests.swift
 
-import DeclarationDerivationDiagnostics
-import DeclarationDerivationModel
+import Declaration_Derivation_Diagnostics
+import Declaration_Derivation_Model
 import SwiftSyntax
 import SwiftSyntaxMacroExpansion
 import SwiftSyntaxMacros
 import SwiftSyntaxMacrosGenericTestSupport
 import Testing
-import WitnessDerivation
+import Witness_Derivation_Core
 
 @testable import WitnessDerivationMacros
 
@@ -19,9 +19,8 @@ private let witnessMacros: [String: MacroSpec] = [
 
 // MARK: - Swift Testing adapter
 
-/// Bridges `SwiftSyntaxMacrosGenericTestSupport.assertMacroExpansion`'s
-/// framework-agnostic `failureHandler` callback to Swift Testing's
-/// `Issue.record(...)`.
+/// Bridges the generic macro-test support's framework-agnostic failure
+/// handler to Swift Testing issue recording.
 private func expectMacroExpansion(
     _ originalSource: String,
     expandedSource: String,

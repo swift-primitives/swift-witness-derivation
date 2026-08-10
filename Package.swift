@@ -16,7 +16,7 @@ let package = Package(
         // MARK: - Namespace (per [MOD-017])
         .library(
             name: "Witness Derivation",
-            targets: ["WitnessDerivation", "Witness Derivation"]
+            targets: ["Witness Derivation Core", "Witness Derivation"]
         ),
         .library(
             name: "Witness Derivation Macros",
@@ -39,7 +39,7 @@ let package = Package(
         .target(
             name: "Witness Derivation",
             dependencies: [
-                "WitnessDerivation",
+                "Witness Derivation Core",
                 "WitnessDerivationMacros",
             ]
         ),
@@ -47,7 +47,7 @@ let package = Package(
         // TX-D3: witness client and forwarding derivation over the shared
         // declaration-derivation core; syntax-free and Foundation-free.
         .target(
-            name: "WitnessDerivation",
+            name: "Witness Derivation Core",
             dependencies: [
                 .product(name: "Declaration Derivation Model", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Diagnostics", package: "swift-declaration-derivation"),
@@ -57,7 +57,7 @@ let package = Package(
         .macro(
             name: "WitnessDerivationMacros",
             dependencies: [
-                "WitnessDerivation",
+                "Witness Derivation Core",
                 .product(name: "Declaration Derivation Model", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Diagnostics", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Analysis", package: "swift-declaration-derivation"),
@@ -77,14 +77,14 @@ let package = Package(
         .testTarget(
             name: "Witness Derivation Consumer Tests",
             dependencies: [
-                "WitnessDerivation",
+                "Witness Derivation Core",
                 "Witness Derivation",
             ]
         ),
         .testTarget(
             name: "Witness Derivation Tests",
             dependencies: [
-                "WitnessDerivation",
+                "Witness Derivation Core",
                 .product(name: "Declaration Derivation Model", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Diagnostics", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Analysis", package: "swift-declaration-derivation"),
@@ -95,7 +95,7 @@ let package = Package(
         .testTarget(
             name: "Witness Derivation Macros Tests",
             dependencies: [
-                "WitnessDerivation",
+                "Witness Derivation Core",
                 "WitnessDerivationMacros",
                 .product(name: "Declaration Derivation Model", package: "swift-declaration-derivation"),
                 .product(name: "Declaration Derivation Diagnostics", package: "swift-declaration-derivation"),
