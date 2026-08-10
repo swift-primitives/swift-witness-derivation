@@ -1,7 +1,7 @@
 // Witness.Derivation.ForwarderEmitter.swift
 
-public import DeclarationDerivationDiagnostics
-public import DeclarationDerivationModel
+public import Declaration_Derivation_Diagnostics
+public import Declaration_Derivation_Model
 
 extension Witness.Derivation {
     /// The deterministic forwarder emitter.
@@ -14,6 +14,7 @@ extension Witness.Derivation {
     /// constructor. Emission is a pure function of the analyzed IR and
     /// renders byte-identically on every run.
     public struct ForwarderEmitter: Sendable {
+        /// Creates a forwarder emitter.
         public init() {}
     }
 }
@@ -28,6 +29,7 @@ extension Witness.Derivation.ForwarderEmitter {
         switch node.kind {
         case .structure, .actor:
             try instanceForwardingInitializer(for: node)
+
         case .enumeration:
             caseForwardingInitializer(for: node)
         }
@@ -56,6 +58,7 @@ extension Witness.Derivation.ForwarderEmitter {
                 // Actors are Sendable, so the closure may capture the
                 // instance and await across its isolation.
                 lines.append("    self.\(name) = { await instance.\(name) }")
+
             case .structure, .enumeration:
                 // A structure need not be Sendable; capture the forwarded
                 // member value instead of the instance so the @Sendable

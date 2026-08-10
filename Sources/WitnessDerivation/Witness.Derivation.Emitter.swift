@@ -1,7 +1,7 @@
 // Witness.Derivation.Emitter.swift
 
-public import DeclarationDerivationDiagnostics
-public import DeclarationDerivationModel
+public import Declaration_Derivation_Diagnostics
+public import Declaration_Derivation_Model
 
 extension Witness.Derivation {
     /// The deterministic witness-client emitter.
@@ -16,8 +16,10 @@ extension Witness.Derivation {
     /// member the contract mandates. Handwritten declarations outside the
     /// generation contract are never touched.
     public struct Emitter: Sendable {
+        /// The generation contract emission renders under.
         public let contract: Witness.GenerationContract
 
+        /// Creates an emitter for the given generation contract.
         public init(contract: Witness.GenerationContract) {
             self.contract = contract
         }
@@ -55,6 +57,7 @@ extension Witness.Derivation.Emitter {
         switch kind {
         case .structure, .enumeration:
             "@Sendable () -> \(typeText)"
+
         case .actor:
             "@Sendable () async -> \(typeText)"
         }
@@ -124,7 +127,8 @@ extension Witness.Derivation.Emitter {
         lines.append(contentsOf: assignments)
         lines.append("}")
         return lines.joined(separator: "\n").split(
-            separator: "\n", omittingEmptySubsequences: false
+            separator: "\n",
+            omittingEmptySubsequences: false
         ).map(String.init)
     }
 
@@ -149,6 +153,7 @@ extension Witness.Derivation.Emitter {
                 )
             }
             return closureType(producing: typeReference.text, of: node.kind)
+
         case .enumeration:
             return closureType(producing: node.name.text, of: node.kind)
         }

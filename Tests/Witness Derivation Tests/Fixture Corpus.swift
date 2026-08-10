@@ -1,6 +1,6 @@
 // Fixture Corpus.swift
 
-import DeclarationDerivationModel
+import Declaration_Derivation_Model
 import SwiftParser
 import SwiftSyntax
 import WitnessDerivation

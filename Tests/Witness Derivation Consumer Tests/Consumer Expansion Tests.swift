@@ -1,8 +1,8 @@
 // Live Expansion Tests.swift
 
 import Testing
-import Witness_Derivation
 import WitnessDerivation
+import Witness_Derivation
 
 // MARK: - Consumer-integration control
 //

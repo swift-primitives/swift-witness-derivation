@@ -1,6 +1,6 @@
 // Witness.Derivation.Model.swift
 
-public import DeclarationDerivationModel
+public import Declaration_Derivation_Model
 
 /// Namespace for witness derivation.
 ///
@@ -29,10 +29,14 @@ extension Witness {
     /// version pin of the generator).
     public struct GenerationContract: Hashable, Sendable {
 
+        /// The revision of the witness generation contract itself.
         public let revision: Revision
+        /// The declaration IR schema version the contract generates under.
         public let schemaVersion: Declaration.IR.SchemaVersion
+        /// The exact package version pin of the generator.
         public let packageVersionPin: PackageVersionPin
 
+        /// Creates a contract from its revision, schema version and pin.
         public init(
             revision: Revision,
             schemaVersion: Declaration.IR.SchemaVersion,
@@ -48,19 +52,25 @@ extension Witness {
 extension Witness.GenerationContract {
     /// The revision of the witness generation contract itself.
     public struct Revision: Hashable, Sendable {
+        /// The raw textual value.
         public let text: String
 
+        /// Creates a value from its raw text.
         public init(_ text: String) {
             self.text = text
         }
     }
 
     /// The exact package version pin of the generator that produced an
-    /// output. Consumers admit expansion-behavior exceptions only when
-    /// their resolved pin matches the receipt's pin.
+    /// output.
+    ///
+    /// Consumers admit expansion-behavior exceptions only when their
+    /// resolved pin matches the receipt's pin.
     public struct PackageVersionPin: Hashable, Sendable {
+        /// The raw textual value.
         public let text: String
 
+        /// Creates a value from its raw text.
         public init(_ text: String) {
             self.text = text
         }
