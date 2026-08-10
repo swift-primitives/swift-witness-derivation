@@ -3,7 +3,7 @@
 import Declaration_Derivation_Model
 import SwiftParser
 import SwiftSyntax
-import WitnessDerivation
+import Witness_Derivation_Core
 
 /// The TX-D3 fixture corpus: the declaration forms witness derivation must
 /// cover under IR schema v1, plus the malformed and ownership-ambiguous

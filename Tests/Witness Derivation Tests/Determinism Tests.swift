@@ -5,7 +5,7 @@ import Declaration_Derivation_Diagnostics
 import Declaration_Derivation_Model
 import Declaration_SwiftSyntax_Adapter
 import Testing
-import WitnessDerivation
+import Witness_Derivation_Core
 
 extension Witness.Derivation {
     @Suite struct Test {

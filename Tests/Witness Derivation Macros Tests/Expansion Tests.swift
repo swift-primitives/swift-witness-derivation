@@ -7,7 +7,7 @@ import SwiftSyntaxMacroExpansion
 import SwiftSyntaxMacros
 import SwiftSyntaxMacrosGenericTestSupport
 import Testing
-import WitnessDerivation
+import Witness_Derivation_Core
 
 @testable import WitnessDerivationMacros
 

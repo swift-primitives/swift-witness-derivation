@@ -6,7 +6,7 @@ public import Declaration_Derivation_Model
 import Declaration_SwiftSyntax_Adapter
 public import SwiftSyntax
 public import SwiftSyntaxMacros
-import WitnessDerivation
+import Witness_Derivation_Core
 
 /// The `@Witness` attached-macro expansion host.
 ///
