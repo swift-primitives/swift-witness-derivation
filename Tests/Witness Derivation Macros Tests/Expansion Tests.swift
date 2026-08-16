@@ -189,7 +189,10 @@ extension WitnessMacro {
             for _ in 1...2 {
                 expectMacroExpansion(structureFixture, expandedSource: structureFixtureExpansion)
                 expectMacroExpansion(zeroMemberFixture, expandedSource: zeroMemberFixtureExpansion)
-                expectMacroExpansion(enumerationFixture, expandedSource: enumerationFixtureExpansion)
+                expectMacroExpansion(
+                    enumerationFixture,
+                    expandedSource: enumerationFixtureExpansion
+                )
             }
         }
 
@@ -242,7 +245,10 @@ extension WitnessMacro {
                     """,
                 diagnostics: [
                     DiagnosticSpec(
-                        message: "declaration.derivation.malformed-declaration [Bad]: stored property 'x' requires an explicit type annotation",
+                        message: """
+                            declaration.derivation.malformed-declaration [Bad]: \
+                            stored property 'x' requires an explicit type annotation
+                            """,
                         line: 1,
                         column: 1
                     )
