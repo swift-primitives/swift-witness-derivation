@@ -1,5 +1,3 @@
-// Expansion Tests.swift
-
 import Declaration_Derivation_Diagnostics
 import Declaration_Derivation_Model
 import SwiftSyntax
@@ -11,16 +9,10 @@ import Witness_Derivation_Core
 
 @testable import WitnessDerivationMacros
 
-// MARK: - Macro registry
-
 private let witnessMacros: [String: MacroSpec] = [
     "Witness": MacroSpec(type: WitnessMacro.self)
 ]
 
-// MARK: - Swift Testing adapter
-
-/// Bridges the generic macro-test support's framework-agnostic failure
-/// handler to Swift Testing issue recording.
 private func expectMacroExpansion(
     _ originalSource: String,
     expandedSource: String,
@@ -52,8 +44,6 @@ private func expectMacroExpansion(
         column: column
     )
 }
-
-// MARK: - Expansion fixtures (the expected sources are the API snapshot of the expanded client/forwarder interface)
 
 private let structureFixture = """
     @Witness
@@ -182,9 +172,7 @@ private let malformedFixture = """
 
 extension WitnessMacro {
     @Suite struct Test {
-        /// Self-firing control: the fixture corpus expands twice with
-        /// identical expansions; the expected sources are the API snapshot
-        /// of the expanded client/forwarder interface.
+
         @Test func `fixture corpus expands identically twice`() {
             for _ in 1...2 {
                 expectMacroExpansion(structureFixture, expandedSource: structureFixtureExpansion)
@@ -196,8 +184,6 @@ extension WitnessMacro {
             }
         }
 
-        /// Near miss: handwritten declarations outside the generation
-        /// contract are left untouched by the expansion.
         @Test func `handwritten declarations are left untouched`() {
             expectMacroExpansion(
                 nearMissFixture,
@@ -233,8 +219,6 @@ extension WitnessMacro {
             )
         }
 
-        /// Negative control: the malformed fixture expands to nothing and
-        /// emits the stable diagnostic.
         @Test func `malformed fixture yields the stable diagnostic`() {
             expectMacroExpansion(
                 malformedFixture,

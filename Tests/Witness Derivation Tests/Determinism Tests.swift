@@ -1,5 +1,3 @@
-// Determinism Tests.swift
-
 import Declaration_Derivation_Analysis
 import Declaration_Derivation_Diagnostics
 import Declaration_Derivation_Model
@@ -9,8 +7,7 @@ import Witness_Derivation_Core
 
 extension Witness.Derivation {
     @Suite struct Test {
-        /// Positive control: deriving the fixture corpus twice yields
-        /// byte-identical member declarations and provenance.
+
         @Test(
             arguments: [
                 FixtureCorpus.zeroMemberStructure,
@@ -44,8 +41,6 @@ extension Witness.Derivation {
             )
         }
 
-        /// Negative control: a malformed declaration fails with the same
-        /// stable diagnostic on every run.
         @Test func `malformed declaration yields the stable diagnostic twice`() {
             let adapter = Declaration.SwiftSyntaxAdapter()
 

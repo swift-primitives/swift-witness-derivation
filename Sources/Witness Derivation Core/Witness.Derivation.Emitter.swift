@@ -1,25 +1,12 @@
-// Witness.Derivation.Emitter.swift
-
 public import Declaration_Derivation_Diagnostics
 public import Declaration_Derivation_Model
 
 extension Witness.Derivation {
-    /// The deterministic witness-client emitter.
-    ///
-    /// Emission is a pure function of the analyzed IR and the witness
-    /// generation contract: the same input renders byte-identically on
-    /// every run. The emitter derives the witness client — a nested
-    /// `Witness` structure with closure storage for every normalized
-    /// member and a label- and default-preserving memberwise initializer —
-    /// composes the forwarding initializer of
-    /// `Witness.Derivation.ForwarderEmitter`, and appends the provenance
-    /// member the contract mandates. Handwritten declarations outside the
-    /// generation contract are never touched.
+
     public struct Emitter: Sendable {
-        /// The generation contract emission renders under.
+
         public let contract: Witness.GenerationContract
 
-        /// Creates an emitter for the given generation contract.
         public init(contract: Witness.GenerationContract) {
             self.contract = contract
         }
@@ -28,8 +15,6 @@ extension Witness.Derivation {
 
 extension Witness.Derivation.Emitter {
 
-    /// The derived member declarations for an analyzed IR, in stable
-    /// order, each rendered as canonical Swift source.
     public func memberDeclarations(
         for intermediateRepresentation: Declaration.IR
     ) throws(Declaration.Derivation.Diagnostic) -> [String] {
@@ -47,9 +32,6 @@ extension Witness.Derivation.Emitter {
         ]
     }
 
-    /// The closure type stored for a member of a node: synchronous for
-    /// structures and enumerations, asynchronous for actors (whose stored
-    /// state is isolation-protected).
     public static func closureType(
         producing typeText: String,
         of kind: Declaration.Node.Kind
@@ -62,8 +44,6 @@ extension Witness.Derivation.Emitter {
             "@Sendable () async -> \(typeText)"
         }
     }
-
-    // MARK: - Derived members
 
     private func witnessClientDeclaration(
         for node: Declaration.Node
@@ -136,9 +116,6 @@ extension Witness.Derivation.Emitter {
         "public static var witnessDerivationProvenance: String { \"\(contract.provenance)\" }"
     }
 
-    /// The stored closure type of a normalized member: for structures and
-    /// actors a producer of the member's declared type, for enumerations a
-    /// producer of the enclosing enumeration itself.
     static func storedClosureType(
         for member: Declaration.Node.Member,
         of node: Declaration.Node

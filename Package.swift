@@ -13,7 +13,7 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Namespace (per [MOD-017])
+
         .library(
             name: "Witness Derivation",
             targets: ["Witness Derivation Core", "Witness Derivation"]
@@ -31,14 +31,7 @@ let package = Package(
         .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0"..<"603.0.0"),
     ],
     targets: [
-        // MARK: - Namespace and attached-macro front (per [MOD-017])
-        // The @Witness declaration lives here rather than in WitnessDerivation
-        // because a target that declares an external macro must depend on the
-        // compiler plugin that implements it, and WitnessDerivationMacros
-        // already depends on WitnessDerivation — putting the declaration in
-        // the core would close a dependency cycle. This target is part of the
-        // "Witness Derivation" library product, so a consumer of that product
-        // receives both the derivation core and a writable @Witness.
+
         .target(
             name: "Witness Derivation",
             dependencies: [
@@ -46,9 +39,7 @@ let package = Package(
                 "WitnessDerivationMacros",
             ]
         ),
-        // MARK: - Witness derivation core (model, contract, emitters) and the @Witness macro front
-        // TX-D3: witness client and forwarding derivation over the shared
-        // declaration-derivation core; syntax-free and Foundation-free.
+
         .target(
             name: "Witness Derivation Core",
             dependencies: [
@@ -62,7 +53,7 @@ let package = Package(
                 ),
             ]
         ),
-        // MARK: - Attached-macro expansion host (thin adapter over the shared core; build-time only, excluded from Embedded)
+
         .macro(
             name: "WitnessDerivationMacros",
             dependencies: [
@@ -89,12 +80,7 @@ let package = Package(
                 .product(name: "SwiftDiagnostics", package: "swift-syntax"),
             ]
         ),
-        // MARK: - Consumer-integration control (product surface only)
-        // This target depends on nothing but the targets behind the "Witness
-        // Derivation" library product — no macro-implementation target — so it
-        // compiles against exactly what an external consumer receives. A test
-        // target that also depends on WitnessDerivationMacros cannot detect a
-        // missing plugin edge on the product.
+
         .testTarget(
             name: "Witness Derivation Consumer Tests",
             dependencies: [
